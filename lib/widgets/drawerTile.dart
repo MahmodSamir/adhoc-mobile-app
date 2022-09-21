@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class drawerTile extends StatelessWidget {
   String text;
   IconData icn;
+  //Function ontap;
   drawerTile(this.text, this.icn, {super.key});
 
   @override
@@ -14,7 +15,7 @@ class drawerTile extends StatelessWidget {
         ListTile(
           leading: Icon(icn),
           title: Text(text),
-          onTap: () => print("list Tapped"),
+          onTap: () => false,
         ),
         Align(
           alignment: Alignment.center,

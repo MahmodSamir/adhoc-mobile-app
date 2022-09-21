@@ -1,8 +1,15 @@
 import 'package:adhoc/screens/home.dart';
+import 'package:adhoc/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var token = prefs.getString('key');
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: token == null ? LoginPage() : home()));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +33,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: home(),
+      //home: LoginPage(),
     );
   }
 }
