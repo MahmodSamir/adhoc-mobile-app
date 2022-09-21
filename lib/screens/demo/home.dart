@@ -1,6 +1,17 @@
+import 'dart:convert';
 
+import 'package:adhoc/screens/login.dart';
+import 'package:adhoc/widgets/addButton.dart';
+import 'package:adhoc/widgets/cardTile.dart';
+import 'package:adhoc/widgets/drawerTile.dart';
+import 'package:adhoc/widgets/flatButton.dart';
+import 'package:adhoc/widgets/imageCard.dart';
+import 'package:adhoc/widgets/imageCards.dart';
+import 'package:adhoc/widgets/listTile.dart';
+import 'package:adhoc/widgets/theme_config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,7 +43,7 @@ class _homeState extends State<home> {
     );
     if (res.statusCode == 200) {
       return res.data;
-    }
+      }
   }
 
   getToken() async {
@@ -44,27 +55,27 @@ class _homeState extends State<home> {
     var respWidth = MediaQuery.of(context).size.width;
     var respHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Center(
-          child: FutureBuilder(
-            future: fetch(),
-            builder: (ctx, dynamic snapShot){
-              if(snapShot.connectionState == ConnectionState.waiting){
-                return CircularProgressIndicator();
-              }else{
-                return ListView.builder(
-                  itemBuilder: (_,index){
-                    return ListTile(
-                      leading: CircleAvatar(backgroundColor: Colors.pink,),
-                      title: Text(snapShot.data[index]['username'].toString()),
-                      //subtitle: Text("${snapShot[index]['id']}"),
-                    );
-                  },
-                  itemCount: 2,
+      body: Center(
+        child: FutureBuilder(
+          future: fetch(),
+          builder: (ctx, dynamic snapShot){
+            if(snapShot.connectionState == ConnectionState.waiting){
+              return CircularProgressIndicator();
+          }else{
+            return ListView.builder(
+              itemBuilder: (_,index){
+                return ListTile(
+                  leading: CircleAvatar(backgroundColor: Colors.pink,),
+                  title: Text(snapShot.data[index]['username'].toString()),
+                  //subtitle: Text("${snapShot[index]['id']}"),
                 );
-              }
-            },
-          ),
-        )
+              },
+              itemCount: 2,
+              );
+          }
+          },
+        ),
+      )
 
     );
   }
